@@ -18,6 +18,7 @@ MainWindow::~MainWindow()
 sf::Music music;
 void MainWindow::on_playButton_clicked()
 {
+    std::cout << "Play music" << std::endl;
     if (!music.openFromFile("/u/38/liimatl3/unix/Desktop/dankshit.wav"))
         return; // error
 
