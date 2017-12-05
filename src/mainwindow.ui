@@ -98,11 +98,24 @@
        <string>Now playing:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_2">
+     <widget class="QLabel" name="playingLabel">
       <property name="text">
        <string>TextLabel</string>
       </property>
      </widget>
+    </widget>
+    <widget class="QPushButton" name="openButton">
+     <property name="geometry">
+      <rect>
+       <x>1640</x>
+       <y>20</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Open</string>
+     </property>
     </widget>
    </widget>
    <widget class="QTreeView" name="treeView_2">
@@ -143,7 +156,7 @@
        <x>0</x>
        <y>0</y>
        <width>1741</width>
-       <height>23</height>
+       <height>27</height>
       </rect>
      </property>
      <attribute name="label">
@@ -156,7 +169,7 @@
        <x>0</x>
        <y>0</y>
        <width>1741</width>
-       <height>23</height>
+       <height>27</height>
       </rect>
      </property>
      <attribute name="label">
@@ -171,7 +184,7 @@
      <x>0</x>
      <y>0</y>
      <width>1801</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
