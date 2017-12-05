@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "player.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,8 +25,11 @@ private slots:
 
     void on_openButton_clicked();
 
+    void on_horizontalSlider_sliderMoved(int position);
+
 private:
     Ui::MainWindow *ui;
+    Player _player;
 };
 
 #endif // MAINWINDOW_H

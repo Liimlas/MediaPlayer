@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <SFML/Audio.hpp>
 #include <QtWidgets/QPushButton>
 #include <QFileDialog>
 #include <iostream>
@@ -19,11 +18,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-sf::Music music;
 void MainWindow::on_playButton_clicked()
 {
     std::cout << "Play music" << std::endl;
-    music.play();
+    if (_player.Playing()) {
+
+    }
+    _player.Play();
 }
 
 
@@ -41,10 +42,15 @@ void MainWindow::on_openButton_clicked()
 {
     auto file = QFileDialog::getOpenFileName(this, tr("Open Music"), "/home/", tr("Music Files (*.wav *.mp3)"));
 
-    if (!music.openFromFile(file.toStdString())) {
-        printf("Could not open file");
+    if (!_player.OpenMusic(file.toStdString())) {
+        printf("Could not open filen\n");
         return; // error
     }
 
     ui->playingLabel->setText(file);
+}
+
+void MainWindow::on_horizontalSlider_sliderMoved(int position)
+{
+    _player.SetVolume((float)position);
 }
