@@ -7,6 +7,7 @@ class FileList
 public:
     FileList(QTreeView*);
     ~FileList();
+    QString getSongPath(const QModelIndex &);
 private:
     QFileSystemModel *model;
 };

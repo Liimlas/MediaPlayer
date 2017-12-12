@@ -28,6 +28,8 @@ private slots:
 
     void on_horizontalSlider_sliderMoved(int position);
 
+    void on_treeView_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::MainWindow *ui;
     Player _player;

@@ -10,7 +10,6 @@ bool Player::OpenMusic(std::string file)
     if (!_music.openFromFile(file)) {
         return false; // error
     }
-
     return true;
 }
 
