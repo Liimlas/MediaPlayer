@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "player.h"
+#include "filelist.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +31,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Player _player;
+    FileList *fileList;
 };
 
 #endif // MAINWINDOW_H

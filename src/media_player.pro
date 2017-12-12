@@ -36,16 +36,18 @@ CONFIG(debug, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-networ
 
 INCLUDEPATH += "/usr/include/SFML"
 DEPENDPATH += "/usr/include/SFML"
-
+QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    player.cpp
+    player.cpp \
+    filelist.cpp
 
 HEADERS += \
         mainwindow.h \
-    player.h
+    player.h \
+    filelist.h
 
 FORMS += \
         mainwindow.ui
