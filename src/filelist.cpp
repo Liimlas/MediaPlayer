@@ -1,8 +1,9 @@
 #include "filelist.h"
 #include <iostream>
 #include <QStandardPaths>
-
-
+#include <attachedpictureframe.h>
+#include <id3v2tag.h>
+#include <mpegfile.h>
 FileList::FileList(QTreeView *parent)
 {
     model = new QFileSystemModel;
@@ -29,9 +30,5 @@ void FileList::viewSongData(QString filepath, QLabel *label){
 }
 
 bool FileList::updateSongData(QString file){
-    return true;
-}
-
-bool FileList::setCoverImage(QString file){
     return true;
 }

@@ -14,7 +14,6 @@ public:
     QString getSongPath(const QModelIndex &);
     void viewSongData(QString, QLabel *);
     bool updateSongData(QString);
-    bool setCoverImage(QString);
 private:
     QFileSystemModel *model;
 };
