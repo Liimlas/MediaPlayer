@@ -59,17 +59,30 @@ void MainWindow::on_playButton_clicked()
 
 void MainWindow::on_forwardButton_clicked()
 {
-
+    QModelIndex index = ui->treeView->indexBelow(ui->treeView->currentIndex());
+    if(index.isValid())
+    {
+        ui->treeView->setCurrentIndex(index);
+        loadSelectedSong(index);
+    }
 }
 
 void MainWindow::on_backwardButton_clicked()
 {
-
+    QModelIndex index = ui->treeView->indexAbove(ui->treeView->currentIndex());
+    if(index.isValid())
+    {
+        ui->treeView->setCurrentIndex(index);
+        loadSelectedSong(index);
+    }
 }
-
 
 void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 {
+    loadSelectedSong(index);
+
+}
+void MainWindow::loadSelectedSong(const QModelIndex &index){
     QString filePath = fileList->getSongPath(index);
     TagLib::Tag *tag = fileList->getCurrentTag();
     auto text = tag->artist() +"\n"+ tag->title().toCString();
@@ -80,7 +93,6 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
     ui->CommentInput->setText(tag->comment().toCString());
     OpenFile(filePath);
     _player->Play();
-
 }
 
 void MainWindow::on_openButton_clicked()
