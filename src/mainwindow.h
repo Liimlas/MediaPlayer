@@ -22,6 +22,8 @@ public:
     void setValue(QMediaPlayer::State state);
 
     void positionSliderUpdate(qint64 position);
+    void setSongDuration(qint64 position);
+
 private slots:
     void on_playButton_clicked();
 
@@ -38,6 +40,7 @@ private slots:
     void on_volumeSlider_valueChanged(int value);
 
     void on_PositionSlider_sliderReleased();
+
 
 private:
     Ui::MainWindow *ui;

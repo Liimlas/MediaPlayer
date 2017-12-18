@@ -27,7 +27,9 @@ bool Player::OpenMusic(QString path)
     return true;
 }
 
-void Player::Play() {
+void Player::Play()
+{
+    _window->setSongDuration(0);
     _player->play();
 }
 
@@ -35,7 +37,6 @@ void Player::Pause()
 {
     _player->pause();
 }
-
 
 void Player::SetVolume(float volume)
 {

@@ -1,9 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-//#include <QtWidgets/QPushButton>
 #include <QFileDialog>
 #include <iostream>
 #include <QStandardPaths>
+#include <string>
+#include <QString>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -102,9 +103,24 @@ void MainWindow::on_volumeSlider_valueChanged(int position)
 void MainWindow::positionSliderUpdate(qint64 position)
 {
     auto percent = (float)position / (float)_player->Duration() * 10000.f;
-
+    setSongDuration(position);
     if (!ui->PositionSlider->isSliderDown()) {
         ui->PositionSlider->setValue((int)percent);
+    }
+}
+
+void MainWindow::setSongDuration(qint64 position)
+{
+    int fullLength = _player->Duration() / 1000;
+    int currentPosition = position / 1000;
+    int wholeMinutes = fullLength / 60;
+
+    if(wholeMinutes == 0) {
+        std::string text = std::to_string(currentPosition) + "/" + std::to_string(fullLength);
+        ui->durationLabel->setText(QString(text.c_str()));
+    }
+    else {
+        ui->durationLabel->setText(QString(std::to_string(fullLength).c_str()));
     }
 }
 
