@@ -6,6 +6,7 @@
 #include <string>
 #include <QString>
 #include <tag.h>
+#include <sstream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -84,7 +85,7 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 void MainWindow::loadSelectedSong(const QModelIndex &index){
     QString filePath = fileList->getSongPath(index);
     TagLib::Tag *tag = fileList->getCurrentTag();
-    auto text = tag->artist() +"\n"+ tag->title().toCString() + "\n" + tag->album().toCString();
+    auto text = tag->artist() +"\n"+ tag->title().toCString();
     ui->playingLabel->setText(QString(text.toCString()));
     ui->AlbumInput->setText(tag->album().toCString());
     ui->TitleInput->setText(tag->title().toCString());
@@ -127,7 +128,7 @@ void MainWindow::positionSliderUpdate(qint64 position)
         ui->PositionSlider->setValue((int)percent);
     }
 }
-
+/*
 void MainWindow::setSongDuration(qint64 position)
 {
     int fullLength = _player->Duration() / 1000;
@@ -139,9 +140,23 @@ void MainWindow::setSongDuration(qint64 position)
         ui->durationLabel->setText(QString(text.c_str()));
     }
     else {
-        std::string text = std::to_string(currentPosition / 60) + ":" + std::to_string(currentPosition % 60) + "/" + std::to_string(fullLength / 60) + ":" + std::to_string(fullLength % 60);
+        std::string ternaryStr1 = (currentPosition % 60) < 10 ? ("0" + std::to_string(currentPosition % 60)) : std::to_string(currentPosition % 60);
+        std::string ternaryStr2 = (fullLength % 60) < 10 ?("0" + std::to_string(fullLength % 60)) : std::to_string(fullLength % 60);
+        std::string text = std::to_string(currentPosition / 60) + ":" + ternaryStr1 + "/" + std::to_string(fullLength / 60) + ":" + ternaryStr2;
         ui->durationLabel->setText(QString(text.c_str()));
     }
+}
+*/
+void MainWindow::setSongDuration(qint64 position)
+{
+    int fullLength = _player->Duration() / 1000;
+    int currentPosition = position / 1000;
+
+    std::string ternaryStr1 = (currentPosition % 60) < 10 ? ("0" + std::to_string(currentPosition % 60)) : std::to_string(currentPosition % 60);
+    std::string ternaryStr2 = (fullLength % 60) < 10 ?("0" + std::to_string(fullLength % 60)) : std::to_string(fullLength % 60);
+    std::string text = std::to_string(currentPosition / 60) + ":" + ternaryStr1 + "/" + std::to_string(fullLength / 60) + ":" + ternaryStr2;
+    ui->durationLabel->setText(QString(text.c_str()));
+
 }
 
 void MainWindow::on_PositionSlider_sliderReleased()
