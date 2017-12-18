@@ -3,9 +3,12 @@
 #include <QFileDialog>
 #include <iostream>
 #include <QStandardPaths>
+<<<<<<< HEAD
 #include <string>
 #include <QString>
+=======
 #include <tag.h>
+>>>>>>> 41923626e5a71716e59b3184b86b27bb726b5fd2
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -126,8 +129,7 @@ void MainWindow::setSongDuration(qint64 position)
         ui->durationLabel->setText(QString(text.c_str()));
     }
     else {
-        std::string text = std::to_string(currentPosition / 60) + ":" + std::to_string(currentPosition % 60) + "/" + std::to_string(fullLength / 60) + ":" + std::to_string(fullLength % 60);
-        ui->durationLabel->setText(QString(text.c_str()));
+        ui->durationLabel->setText(QString(std::to_string(fullLength).c_str()));
     }
 }
 

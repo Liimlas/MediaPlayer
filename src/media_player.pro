@@ -43,4 +43,4 @@ RESOURCES += \
     assets.qrc \
     assets.qrc
 
-LIBS += -L/home/tomes/workspace/media-player-4/lib/taglib/lib/ -ltag -lz
+LIBS += -L../lib/taglib/lib/ -ltag -lz
