@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -22,20 +22,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-#ifdef __linux__
-LIBS += -L"/usr/libs/x86_64-linux-gnu"
-INCLUDEPATH += "/usr/include/SFML"
-DEPENDPATH += "/usr/include/SFML"
-#elif _WIN32
-LIBS += -L"C:\SFML\lib"
-INCLUDEPATH += "C:\SFML\include"
-DEPENDPATH += "C:\SFML\include"
-#endif
-CONFIG(release, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
-CONFIG(debug, debug|release): LIBS += -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
-
-INCLUDEPATH += "/usr/include/SFML"
-DEPENDPATH += "/usr/include/SFML"
 QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += \

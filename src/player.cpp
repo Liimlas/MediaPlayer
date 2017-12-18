@@ -2,39 +2,26 @@
 
 Player::Player()
 {
-
+    _player = new QMediaPlayer;
 }
 
-bool Player::OpenMusic(std::string file)
+bool Player::OpenMusic(QString file)
 {
-    if (!_music.openFromFile(file)) {
-        return false; // error
-    }
+    _player->setMedia(QUrl::fromLocalFile(file));
     return true;
 }
 
 void Player::Play() {
-    _music.play();
+    _player->play();
 }
 
 void Player::Pause()
 {
-    _music.pause();
-}
-
-bool Player::Playing()
-{
-    return (_music.getStatus() == sf::SoundSource::Status::Playing);
-}
-
-
-bool Player::Paused()
-{
-    return (_music.getStatus() == sf::SoundSource::Status::Paused);
+    _player->pause();
 }
 
 
 void Player::SetVolume(float volume)
 {
-    _music.setVolume(volume);
+    _player->setVolume(volume);
 }

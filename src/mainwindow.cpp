@@ -23,9 +23,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_playButton_clicked()
 {
     std::cout << "Play music" << std::endl;
-    if (_player.Playing()) {
-
-    }
     _player.Play();
 }
 
@@ -44,7 +41,7 @@ void MainWindow::on_openButton_clicked()
 {
     auto file = QFileDialog::getOpenFileName(this, tr("Open Music"), "/home/", tr("Music Files (*.wav *.mp3)"));
     std::cout << file.toStdString() << std::endl;
-    if (!_player.OpenMusic(file.toStdString())) {
+    if (!_player.OpenMusic(file)) {
         return; // error
     }
 
@@ -58,8 +55,8 @@ void MainWindow::on_horizontalSlider_sliderMoved(int position)
 
 void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 {
-    QString filePath = fileList->getSongPath(index);
-    if(!_player.OpenMusic(filePath.toStdString())){
+    auto filePath = fileList->getSongPath(index);
+    if(!_player.OpenMusic(filePath)){
         std::cout << "Could not open file" << filePath.toStdString() << std::endl;
     }
     ui->playingLabel->setText(filePath);

@@ -1,22 +1,19 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <SFML/Audio.hpp>
+#include <QMediaPlayer>
 
 class Player
 {
 public:
     Player();
 
-    bool OpenMusic(std::string file);
+    bool OpenMusic(QString file);
     void Play();
     void Pause();
     void SetVolume(float volume);
-
-    bool Playing();
-    bool Paused();
 private:
-    sf::Music _music;
+    QMediaPlayer *_player;
 };
 
 #endif // PLAYER_H
