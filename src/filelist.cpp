@@ -15,8 +15,8 @@ FileList::FileList(QTreeView *parent)
     NameList.append("Seppo");
 
     auto filter = model->filter();
-    model->setFilter(filter);
-    model->setNameFilters(NameList);
+    //model->setFilter(filter);
+    //model->setNameFilters(NameList);
 
 }
 
