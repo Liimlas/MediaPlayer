@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include <iostream>
 #include <QStandardPaths>
+#include <tag.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->volumeSlider->setValue(50);
     ui->playingLabel->setText("");
     _player->Initialize();
-
     SetButtons(false);
 }
 
@@ -69,7 +69,12 @@ void MainWindow::on_backwardButton_clicked()
 void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 {
     QString filePath = fileList->getSongPath(index);
-    fileList->viewSongData(filePath, ui->playingLabel);
+    TagLib::Tag *tag = fileList->getCurrentTag();
+    auto text = tag->artist() +"\n"+ tag->title().toCString() + "\n" + tag->album().toCString();
+    ui->playingLabel->setText(QString(text.toCString()));
+    ui->AlbumInput->setText(tag->album().toCString());
+    ui->ArtistInput->setText(tag->artist().toCString());
+    ui->CommentInput->setText(tag->comment().toCString());
     OpenFile(filePath);
     _player->Play();
 
@@ -112,4 +117,14 @@ void MainWindow::positionSliderUpdate(qint64 position)
 void MainWindow::on_PositionSlider_sliderReleased()
 {
     _player->SetPosition(_player->Duration() / 10000 * ui->PositionSlider->value());
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    TagLib::Tag *tag = fileList->getCurrentTag();
+    tag->setAlbum(ui->AlbumInput->text().toStdString().c_str());
+    tag->setArtist(ui->ArtistInput->text().toStdString().c_str());
+    tag->setTitle(ui->TitleInput->text().toStdString().c_str());
+    tag->setComment(ui->CommentInput->text().toStdString().c_str());
+    fileList->saveMetadata();
 }

@@ -16,19 +16,22 @@ FileList::FileList(QTreeView *parent)
 }
 FileList::~FileList() {
     delete(model);
+    delete(file);
 }
 
 QString FileList::getSongPath(const QModelIndex &index){
     QString filepath = model->filePath(index);
+    if(file != nullptr){
+        delete(file);
+    }
+    file = new TagLib::FileRef(filepath.toStdString().c_str());
     return filepath;
 }
-
-void FileList::viewSongData(QString filepath, QLabel *label){
-    TagLib::FileRef file(filepath.toLatin1());
-    auto text = file.tag()->artist() +"\n"+ file.tag()->title().toCString() + "\n" + file.tag()->album().toCString();
-    label->setText(QString(text.toCString()));
+void FileList::saveMetadata(){
+    if(file != nullptr){
+        file->save();
+    }
 }
-
-bool FileList::updateSongData(QString file){
-    return true;
+TagLib::Tag *FileList::getCurrentTag(){
+    return file->tag();
 }

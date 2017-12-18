@@ -12,10 +12,11 @@ public:
     FileList(QTreeView*);
     ~FileList();
     QString getSongPath(const QModelIndex &);
-    void viewSongData(QString, QLabel *);
-    bool updateSongData(QString);
+    TagLib::Tag* getCurrentTag();
+    void saveMetadata();
 private:
     QFileSystemModel *model;
+    TagLib::FileRef *file = nullptr;
 };
 
 #endif // FILELIST_H
