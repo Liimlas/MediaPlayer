@@ -116,25 +116,7 @@ void MainWindow::positionSliderUpdate(qint64 position)
         ui->PositionSlider->setValue((int)percent);
     }
 }
-/*
-void MainWindow::setSongDuration(qint64 position)
-{
-    int fullLength = _player->Duration() / 1000;
-    int currentPosition = position / 1000;
-    int wholeMinutes = fullLength / 60;
 
-    if(wholeMinutes == 0) {
-        std::string text = std::to_string(currentPosition) + "/" + std::to_string(fullLength);
-        ui->durationLabel->setText(QString(text.c_str()));
-    }
-    else {
-        std::string ternaryStr1 = (currentPosition % 60) < 10 ? ("0" + std::to_string(currentPosition % 60)) : std::to_string(currentPosition % 60);
-        std::string ternaryStr2 = (fullLength % 60) < 10 ?("0" + std::to_string(fullLength % 60)) : std::to_string(fullLength % 60);
-        std::string text = std::to_string(currentPosition / 60) + ":" + ternaryStr1 + "/" + std::to_string(fullLength / 60) + ":" + ternaryStr2;
-        ui->durationLabel->setText(QString(text.c_str()));
-    }
-}
-*/
 void MainWindow::setSongDuration(qint64 position)
 {
     int fullLength = _player->Duration() / 1000;
@@ -144,7 +126,6 @@ void MainWindow::setSongDuration(qint64 position)
     std::string ternaryStr2 = (fullLength % 60) < 10 ?("0" + std::to_string(fullLength % 60)) : std::to_string(fullLength % 60);
     std::string text = std::to_string(currentPosition / 60) + ":" + ternaryStr1 + "/" + std::to_string(fullLength / 60) + ":" + ternaryStr2;
     ui->durationLabel->setText(QString(text.c_str()));
-
 }
 
 void MainWindow::on_PositionSlider_sliderReleased()
