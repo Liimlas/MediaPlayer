@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "player.h"
 #include "filelist.h"
+#include <QMediaPlayer>
 
 namespace Ui {
 class MainWindow;
@@ -17,10 +18,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void SetPlaying();
-    void SetPaused();
     void SetButtons(bool state);
+    void setValue(QMediaPlayer::State state);
 
+    void positionSliderUpdate(qint64 position);
 private slots:
     void on_playButton_clicked();
 
@@ -36,6 +37,7 @@ private slots:
 
     void on_volumeSlider_valueChanged(int value);
 
+    void on_PositionSlider_sliderReleased();
 
 private:
     Ui::MainWindow *ui;

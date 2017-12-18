@@ -9,6 +9,8 @@ FileList::FileList(QTreeView *parent)
     model->setRootPath(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()));
     parent->setModel(model);
     parent->setRootIndex(idx);
+
+    parent->setSortingEnabled(true);
 }
 FileList::~FileList() {
     delete(model);

@@ -19,6 +19,8 @@ public:
     int GetVolume() const;
     int TogglePlay();
     void Initialize();
+    qint64 Duration() const;
+    void SetPosition(qint64 position);
 
 private:
     QMediaPlayer *_player;

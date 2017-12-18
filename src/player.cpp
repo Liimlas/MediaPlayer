@@ -6,6 +6,13 @@ Player::Player(MainWindow *window)
 {
     _player = new QMediaPlayer;
     _window = window;
+
+    QObject::connect(_player, &QMediaPlayer::stateChanged,
+                     window, &MainWindow::setValue);
+    QObject::connect(_player, &QMediaPlayer::positionChanged,
+                     window, &MainWindow::positionSliderUpdate);
+
+    _player->setNotifyInterval(1);
 }
 
 bool Player::OpenMusic(QString path)
@@ -22,13 +29,11 @@ bool Player::OpenMusic(QString path)
 
 void Player::Play() {
     _player->play();
-    _window->SetPlaying();
 }
 
 void Player::Pause()
 {
     _player->pause();
-    _window->SetPaused();
 }
 
 
@@ -46,8 +51,17 @@ void Player::Initialize()
     SetVolume(50);
 }
 
+qint64 Player::Duration() const
+{
+    return _player->duration();
+}
+
+void Player::SetPosition(qint64 position)
+{
+    _player->setPosition(position);
+}
+
 int Player::TogglePlay() {
-    std::cout << this->GetVolume() << std::endl;
     if(_player->state() == 1) {
         Pause();
         return 1;

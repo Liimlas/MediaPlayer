@@ -33,6 +33,21 @@ void MainWindow::SetButtons(bool state) {
     ui->playButton->setEnabled(state);
 }
 
+void MainWindow::setValue(QMediaPlayer::State state)
+{
+    switch (state) {
+        case QMediaPlayer::StoppedState:
+            ui->playButton->setText("Play");
+            break;
+        case QMediaPlayer::PlayingState:
+            ui->playButton->setText("Pause");
+            break;
+        case QMediaPlayer::PausedState:
+            ui->playButton->setText("Play");
+            break;
+    }
+}
+
 // Todo
 void MainWindow::on_playButton_clicked()
 {
@@ -55,13 +70,13 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 {
     auto filePath = fileList->getSongPath(index);
     OpenFile(filePath);
+    _player->Play();
 
 }
 
 void MainWindow::on_openButton_clicked()
 {
     auto file = QFileDialog::getOpenFileName(this, tr("Open Music"), QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()), tr("Music Files (*.wav *.mp3)"));
-    std::cout << file.toStdString() << std::endl;
     OpenFile(file);
 }
 
@@ -83,10 +98,17 @@ void MainWindow::on_volumeSlider_valueChanged(int position)
     _player->SetVolume((float)position);
 }
 
-void MainWindow::SetPlaying() {
-    ui->playButton->setText("Pause");
+
+void MainWindow::positionSliderUpdate(qint64 position)
+{
+    auto percent = (float)position / (float)_player->Duration() * 10000.f;
+
+    if (!ui->PositionSlider->isSliderDown()) {
+        ui->PositionSlider->setValue((int)percent);
+    }
 }
 
-void MainWindow::SetPaused() {
-    ui->playButton->setText("Play");
+void MainWindow::on_PositionSlider_sliderReleased()
+{
+    _player->SetPosition(_player->Duration() / 10000 * ui->PositionSlider->value());
 }

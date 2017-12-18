@@ -26,7 +26,7 @@
       <x>30</x>
       <y>880</y>
       <width>1741</width>
-      <height>71</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -38,8 +38,8 @@
     <widget class="QPushButton" name="playButton">
      <property name="geometry">
       <rect>
-       <x>830</x>
-       <y>19</y>
+       <x>820</x>
+       <y>29</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -51,8 +51,8 @@
     <widget class="QPushButton" name="forwardButton">
      <property name="geometry">
       <rect>
-       <x>940</x>
-       <y>20</y>
+       <x>930</x>
+       <y>30</y>
        <width>41</width>
        <height>31</height>
       </rect>
@@ -64,8 +64,8 @@
     <widget class="QPushButton" name="backwardButton">
      <property name="geometry">
       <rect>
-       <x>760</x>
-       <y>20</y>
+       <x>750</x>
+       <y>30</y>
        <width>41</width>
        <height>31</height>
       </rect>
@@ -104,7 +104,7 @@
      <property name="geometry">
       <rect>
        <x>93</x>
-       <y>20</y>
+       <y>30</y>
        <width>461</width>
        <height>31</height>
       </rect>
@@ -117,7 +117,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>20</y>
+       <y>30</y>
        <width>61</width>
        <height>31</height>
       </rect>
@@ -145,6 +145,22 @@
       <width>1331</width>
       <height>721</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QSlider" name="PositionSlider">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>850</y>
+      <width>1741</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="maximum">
+     <number>9999</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
   </widget>
