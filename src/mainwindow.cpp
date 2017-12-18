@@ -3,6 +3,7 @@
 //#include <QtWidgets/QPushButton>
 #include <QFileDialog>
 #include <iostream>
+#include <QStandardPaths>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -39,9 +40,9 @@ void MainWindow::on_backwardButton_clicked()
 
 void MainWindow::on_openButton_clicked()
 {
-    auto file = QFileDialog::getOpenFileName(this, tr("Open Music"), "/home/", tr("Music Files (*.wav *.mp3)"));
+    auto file = QFileDialog::getOpenFileName(this, tr("Open Music"), QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()), tr("Music Files (*.wav *.mp3)"));
     std::cout << file.toStdString() << std::endl;
-    if (!_player.OpenMusic(file)) {
+    if (!_player.OpenMusic("file")) {
         return; // error
     }
 

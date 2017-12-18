@@ -5,9 +5,15 @@ Player::Player()
     _player = new QMediaPlayer;
 }
 
-bool Player::OpenMusic(QString file)
+bool Player::OpenMusic(QString path)
 {
-    _player->setMedia(QUrl::fromLocalFile(file));
+    auto file = QUrl::fromLocalFile(path);
+
+    if (file.isEmpty()) return false;
+
+    _player->setMedia(file);
+
+    if(_player->error() != QMediaPlayer::NoError) return false;
     return true;
 }
 

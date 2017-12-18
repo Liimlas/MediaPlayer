@@ -1,10 +1,12 @@
 #include "filelist.h"
 #include <iostream>
+#include <QStandardPaths>
+
 FileList::FileList(QTreeView *parent)
 {
     model = new QFileSystemModel;
-    QModelIndex idx = model->index(QDir::homePath().append("/Music"));
-    model->setRootPath(QDir::homePath().append("/Music"));
+    QModelIndex idx = model->index(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()));
+    model->setRootPath(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()));
     parent->setModel(model);
     parent->setRootIndex(idx);
 }
