@@ -2,6 +2,7 @@
 #include <iostream>
 #include <QStandardPaths>
 
+
 FileList::FileList(QTreeView *parent)
 {
     model = new QFileSystemModel;
@@ -17,5 +18,20 @@ FileList::~FileList() {
 }
 
 QString FileList::getSongPath(const QModelIndex &index){
-    return model->filePath(index);
+    QString filepath = model->filePath(index);
+    return filepath;
+}
+
+void FileList::viewSongData(QString filepath, QLabel *label){
+    TagLib::FileRef file(filepath.toLatin1());
+    auto text = file.tag()->artist() +"\n"+ file.tag()->title().toCString() + "\n" + file.tag()->album().toCString();
+    label->setText(QString(text.toCString()));
+}
+
+bool FileList::updateSongData(QString file){
+    return true;
+}
+
+bool FileList::setCoverImage(QString file){
+    return true;
 }

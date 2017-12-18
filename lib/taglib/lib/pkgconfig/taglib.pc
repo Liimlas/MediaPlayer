@@ -1,0 +1,11 @@
+prefix=/home/tomes/taglib
+exec_prefix=/home/tomes/taglib
+libdir=/home/tomes/lib
+includedir=/home/tomes/include
+
+Name: TagLib
+Description: Audio meta-data library
+Requires: 
+Version: 1.11.1
+Libs: -L${libdir} -ltag
+Cflags: -I${includedir}/taglib

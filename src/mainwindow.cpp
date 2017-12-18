@@ -68,7 +68,8 @@ void MainWindow::on_backwardButton_clicked()
 
 void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 {
-    auto filePath = fileList->getSongPath(index);
+    QString filePath = fileList->getSongPath(index);
+    fileList->viewSongData(filePath, ui->playingLabel);
     OpenFile(filePath);
     _player->Play();
 
@@ -90,7 +91,7 @@ void MainWindow::OpenFile(QString path)
 
     SetButtons(true);
     QFileInfo fi(path);
-    ui->playingLabel->setText(fi.fileName());
+    //ui->playingLabel->setText(fi.fileName());
 }
 
 void MainWindow::on_volumeSlider_valueChanged(int position)
