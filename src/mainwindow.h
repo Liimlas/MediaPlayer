@@ -17,6 +17,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void SetPlaying();
+    void SetPaused();
+    void SetButtons(bool state);
+
 private slots:
     void on_playButton_clicked();
 
@@ -26,13 +30,16 @@ private slots:
 
     void on_openButton_clicked();
 
-    void on_horizontalSlider_sliderMoved(int position);
-
     void on_treeView_doubleClicked(const QModelIndex &index);
+
+    void OpenFile(QString path);
+
+    void on_volumeSlider_valueChanged(int value);
+
 
 private:
     Ui::MainWindow *ui;
-    Player _player;
+    Player *_player;
     FileList *fileList;
 };
 
