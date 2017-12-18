@@ -21,10 +21,10 @@ public:
     void Initialize();
     qint64 Duration() const;
     void SetPosition(qint64 position);
+    QMediaPlayer::State getCurrentState();
 
 private:
     QMediaPlayer *_player;
-    int volume = 50;
     MainWindow *_window;
 };
 

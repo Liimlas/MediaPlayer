@@ -24,6 +24,7 @@ public:
     void positionSliderUpdate(qint64 position);
     void setSongDuration(qint64 position);
     void loadSelectedSong(const QModelIndex &);
+    void playNextSong();
 
 private slots:
     void on_playButton_clicked();

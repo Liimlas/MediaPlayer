@@ -11,6 +11,7 @@ Player::Player(MainWindow *window)
                      window, &MainWindow::setValue);
     QObject::connect(_player, &QMediaPlayer::positionChanged,
                      window, &MainWindow::positionSliderUpdate);
+    QObject::connect(_player, &QMediaPlayer::stateChanged, window, &MainWindow::playNextSong);
 
     _player->setNotifyInterval(1);
 }
@@ -25,6 +26,10 @@ bool Player::OpenMusic(QString path)
 
     if(_player->error() != QMediaPlayer::NoError) return false;
     return true;
+}
+
+QMediaPlayer::State Player::getCurrentState(){
+    return _player->state();
 }
 
 void Player::Play()

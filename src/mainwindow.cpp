@@ -77,6 +77,15 @@ void MainWindow::on_backwardButton_clicked()
     }
 }
 
+void MainWindow::playNextSong()
+{
+    std::cout << "Before if " << std::endl;
+    if(_player->getCurrentState() == QMediaPlayer::StoppedState){
+        std::cout << "Before" << std::endl;
+        on_forwardButton_clicked();
+
+    }
+}
 void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 {
     loadSelectedSong(index);
@@ -107,8 +116,6 @@ void MainWindow::OpenFile(QString path)
     if (!_player->OpenMusic(path)) {
         return; // error
     }
-
-
     SetButtons(true);
     QFileInfo fi(path);
     //ui->playingLabel->setText(fi.fileName());
@@ -118,7 +125,6 @@ void MainWindow::on_volumeSlider_valueChanged(int position)
 {
     _player->SetVolume((float)position);
 }
-
 
 void MainWindow::positionSliderUpdate(qint64 position)
 {
@@ -133,6 +139,7 @@ void MainWindow::setSongDuration(qint64 position)
 {
     int fullLength = _player->Duration() / 1000;
     int currentPosition = position / 1000;
+
 
     std::string ternaryStr1 = (currentPosition % 60) < 10 ? ("0" + std::to_string(currentPosition % 60)) : std::to_string(currentPosition % 60);
     std::string ternaryStr2 = (fullLength % 60) < 10 ?("0" + std::to_string(fullLength % 60)) : std::to_string(fullLength % 60);
