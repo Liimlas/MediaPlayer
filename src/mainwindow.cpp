@@ -74,6 +74,7 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
     auto text = tag->artist() +"\n"+ tag->title().toCString() + "\n" + tag->album().toCString();
     ui->playingLabel->setText(QString(text.toCString()));
     ui->AlbumInput->setText(tag->album().toCString());
+    ui->TitleInput->setText(tag->title().toCString());
     ui->ArtistInput->setText(tag->artist().toCString());
     ui->CommentInput->setText(tag->comment().toCString());
     OpenFile(filePath);
