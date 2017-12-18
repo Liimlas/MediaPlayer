@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = media_player
 TEMPLATE = app
 
+INCLUDEPATH += ../lib/taglib/include/taglib
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -41,3 +42,5 @@ FORMS += \
 RESOURCES += \
     assets.qrc \
     assets.qrc
+
+LIBS += -L/home/tomes/workspace/media-player-4/lib/taglib/lib/ -ltag -lz

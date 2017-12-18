@@ -2,7 +2,6 @@
 #include <iostream>
 #include <QStandardPaths>
 #include <QStringList>
-
 FileList::FileList(QTreeView *parent)
 {
     model = new QFileSystemModel;
@@ -23,8 +22,22 @@ FileList::FileList(QTreeView *parent)
 
 FileList::~FileList() {
     delete(model);
+    delete(file);
 }
 
 QString FileList::getSongPath(const QModelIndex &index){
-    return model->filePath(index);
+    QString filepath = model->filePath(index);
+    if(file != nullptr){
+        delete(file);
+    }
+    file = new TagLib::FileRef(filepath.toStdString().c_str());
+    return filepath;
+}
+void FileList::saveMetadata(){
+    if(file != nullptr){
+        file->save();
+    }
+}
+TagLib::Tag *FileList::getCurrentTag(){
+    return file->tag();
 }
