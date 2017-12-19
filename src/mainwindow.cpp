@@ -79,11 +79,8 @@ void MainWindow::on_backwardButton_clicked()
 
 void MainWindow::playNextSong()
 {
-    std::cout << "Before if " << std::endl;
-    if(_player->getCurrentState() == QMediaPlayer::StoppedState){
-        std::cout << "Before" << std::endl;
+    if(_player->Duration() != -1 && _player->Duration() <= _player->getCurrentPosition()){
         on_forwardButton_clicked();
-
     }
 }
 void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)

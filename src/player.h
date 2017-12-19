@@ -21,7 +21,7 @@ public:
     void Initialize();
     qint64 Duration() const;
     void SetPosition(qint64 position);
-    QMediaPlayer::State getCurrentState();
+    qint64 getCurrentPosition();
 
 private:
     QMediaPlayer *_player;

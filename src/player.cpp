@@ -28,8 +28,8 @@ bool Player::OpenMusic(QString path)
     return true;
 }
 
-QMediaPlayer::State Player::getCurrentState(){
-    return _player->state();
+qint64 Player::getCurrentPosition(){
+    return _player->position();
 }
 
 void Player::Play()
