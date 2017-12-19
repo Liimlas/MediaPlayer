@@ -15,9 +15,13 @@ public:
     TagLib::Tag* getCurrentTag();
     void saveMetadata();
     void onSearch(QString);
+    void changeDirectory(QString path);
+    QString getCurrentDirectory();
 private:
     QFileSystemModel *model;
+    QTreeView *tree;
     TagLib::FileRef *file = nullptr;
+    QString currentDirectory;
 };
 
 #endif // FILELIST_H

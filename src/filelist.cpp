@@ -7,13 +7,15 @@
 FileList::FileList(QTreeView *parent)
 {
     model = new QFileSystemModel;
-    QModelIndex const idx = model->index(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()));
-    model->setRootPath(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()));
-    parent->setModel(model);
-    parent->setRootIndex(idx);
-    parent->setSortingEnabled(true);
-    model->setNameFilterDisables(false);
+    tree = parent;
+    currentDirectory = QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath());
+    QModelIndex const idx = model->index(currentDirectory);
+    model->setRootPath(currentDirectory);
+    tree->setModel(model);
+    tree->setRootIndex(idx);
+    tree->setSortingEnabled(true);
 
+    model->setNameFilterDisables(false);
     model->setNameFilters(QStringList() << "*.mp3" << "*.wav");
 
 }
@@ -43,4 +45,20 @@ void FileList::saveMetadata(){
 }
 TagLib::Tag *FileList::getCurrentTag(){
     return file->tag();
+}
+
+void FileList::changeDirectory(QString path){
+    if(model != nullptr){
+        delete(model);
+    }
+    currentDirectory = path;
+    model = new QFileSystemModel;
+    QModelIndex const idx = model->index(currentDirectory);
+    model->setRootPath(currentDirectory);
+    tree->setModel(model);
+    tree->setRootIndex(idx);
+}
+
+QString FileList::getCurrentDirectory(){
+    return currentDirectory;
 }
