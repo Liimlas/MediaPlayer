@@ -28,7 +28,8 @@ bool Player::OpenMusic(QString path)
     return true;
 }
 
-QMediaPlayer::State Player::getCurrentState(){
+QMediaPlayer::State Player::getCurrentState()
+{
     return _player->state();
 }
 
@@ -48,7 +49,8 @@ void Player::SetVolume(float volume)
     _player->setVolume(volume);
 }
 
-int Player::GetVolume() const {
+int Player::GetVolume() const
+{
     return _player->volume();
 }
 
