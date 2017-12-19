@@ -109,8 +109,8 @@
       </rect>
      </property>
      <property name="text">
-      <string>Artist
-Song</string>
+      <string>Artist: -
+Song: -</string>
      </property>
     </widget>
     <widget class="QLabel" name="durationLabel">

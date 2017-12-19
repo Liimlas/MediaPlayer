@@ -13,6 +13,7 @@ FileList::FileList(QTreeView *parent)
     tree->setRootIndex(idx);
     tree->setSortingEnabled(true);
 
+    model->setFilter(QDir::NoDotAndDotDot|QDir::Files);
     model->setNameFilterDisables(false);
     model->setNameFilters(QStringList() << "*.mp3" << "*.wav");
 
@@ -46,11 +47,7 @@ TagLib::Tag *FileList::getCurrentTag(){
 }
 
 void FileList::changeDirectory(QString path){
-    if(model != nullptr){
-        delete(model);
-    }
     currentDirectory = path;
-    model = new QFileSystemModel;
     QModelIndex const idx = model->index(currentDirectory);
     model->setRootPath(currentDirectory);
     tree->setModel(model);
