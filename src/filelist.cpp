@@ -2,6 +2,7 @@
 #include <iostream>
 #include <QStandardPaths>
 #include <QStringList>
+
 FileList::FileList(QTreeView *parent)
 {
     model = new QFileSystemModel;
