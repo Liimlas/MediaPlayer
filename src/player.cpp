@@ -1,7 +1,6 @@
 #include "player.h"
-#include <iostream>
-
 #include "mainwindow.h"
+
 Player::Player(MainWindow *window)
 {
     _player = new QMediaPlayer;

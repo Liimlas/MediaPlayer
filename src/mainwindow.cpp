@@ -1,12 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
-#include <iostream>
-#include <QStandardPaths>
-#include <string>
-#include <QString>
 #include <tag.h>
-#include <sstream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -172,7 +167,6 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_loopButton_toggled(bool checked)
 {
     loopOn = checked;
-    std::cout << checked << std::endl;
 }
 
 
