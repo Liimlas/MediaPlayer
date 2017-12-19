@@ -113,8 +113,12 @@ void MainWindow::updateSongData(){
 
 void MainWindow::on_openButton_clicked()
 {
-    auto file = QFileDialog::getOpenFileName(this, tr("Open Music"), QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()), tr("Music Files (*.wav *.mp3)"));
-    OpenFile(file);
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                 QDir::homePath(),
+                                                 QFileDialog::ShowDirsOnly
+                                                 | QFileDialog::DontResolveSymlinks);
+
+    fileList->changeDirectory(dir);
 }
 
 

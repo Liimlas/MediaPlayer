@@ -14,9 +14,13 @@ public:
     QString getSongPath(const QModelIndex &);
     TagLib::Tag* getCurrentTag();
     void saveMetadata();
+    void changeDirectory(QString path);
+    QString getCurrentDirectory();
 private:
     QFileSystemModel *model;
+    QTreeView *tree;
     TagLib::FileRef *file = nullptr;
+    QString currentDirectory;
 };
 
 #endif // FILELIST_H
