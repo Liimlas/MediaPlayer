@@ -1,8 +1,6 @@
 #include "filelist.h"
-#include <iostream>
 #include <QStandardPaths>
 #include <QStringList>
-#include <string>
 
 FileList::FileList(QTreeView *parent)
 {

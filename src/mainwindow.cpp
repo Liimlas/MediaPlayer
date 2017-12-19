@@ -1,12 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QFileDialog>
-#include <iostream>
-#include <QStandardPaths>
-#include <string>
-#include <QString>
 #include <tag.h>
-#include <sstream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,9 +9,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     _player = new Player(this);
     ui->setupUi(this);
-    fileList = new FileList(ui->treeView);
+
     ui->volumeSlider->setValue(50);
     _player->Initialize();
+    //Setup songList
+    fileList = new FileList(ui->treeView);
     SetButtons(false);
 }
 
@@ -49,26 +46,27 @@ void MainWindow::setValue(QMediaPlayer::State state)
     }
 }
 
-// Todo
 void MainWindow::on_playButton_clicked()
 {
     _player->TogglePlay();
 }
 
-
+//Move forward in fileList
 void MainWindow::on_forwardButton_clicked()
 {
     QModelIndex index = ui->treeView->indexBelow(ui->treeView->currentIndex());
+    //Check if there is next index
     if(index.isValid())
     {
         ui->treeView->setCurrentIndex(index);
         loadSelectedSong(index);
     }
 }
-
+//Move backward in fileList
 void MainWindow::on_backwardButton_clicked()
 {
     QModelIndex index = ui->treeView->indexAbove(ui->treeView->currentIndex());
+    //Check if there is index before
     if(index.isValid())
     {
         ui->treeView->setCurrentIndex(index);
@@ -78,8 +76,9 @@ void MainWindow::on_backwardButton_clicked()
 
 void MainWindow::playNextSong()
 {
-
+    //Check if song has ended
     if(_player->Duration() != -1 && _player->Duration() <= _player->getCurrentPosition()){
+        //Check if looping is on
         if(loopOn) {
             loadSelectedSong(ui->treeView->currentIndex());
         }
@@ -94,9 +93,14 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 
 }
 void MainWindow::loadSelectedSong(const QModelIndex &index){
+    //Get file path
     QString filePath = fileList->getSongPath(index);
+
+    //Parse id3 tag from current song file
     TagLib::Tag *tag = fileList->getCurrentTag();
     auto text = tag->artist() +"\n"+ tag->title().toCString();
+
+    //Update all the fields to use
     ui->playingLabel->setText(QString(text.toCString()));
     ui->AlbumInput->setText(tag->album().toCString());
     ui->TitleInput->setText(tag->title().toCString());
@@ -124,7 +128,6 @@ void MainWindow::OpenFile(QString path)
     }
     SetButtons(true);
     QFileInfo fi(path);
-    //ui->playingLabel->setText(fi.fileName());
 }
 
 void MainWindow::on_volumeSlider_valueChanged(int position)
@@ -166,13 +169,15 @@ void MainWindow::on_pushButton_clicked()
     tag->setArtist(ui->ArtistInput->text().toStdString().c_str());
     tag->setTitle(ui->TitleInput->text().toStdString().c_str());
     tag->setComment(ui->CommentInput->text().toStdString().c_str());
+
+    auto text = tag->artist() +"\n"+ tag->title().toCString();
+    ui->playingLabel->setText(QString(text.toCString()));
     fileList->saveMetadata();
 }
 
 void MainWindow::on_loopButton_toggled(bool checked)
 {
     loopOn = checked;
-    std::cout << checked << std::endl;
 }
 
 

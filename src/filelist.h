@@ -2,7 +2,6 @@
 #define FILELIST_H
 #include <QFileSystemModel>
 #include <QTreeView>
-#include <QLabel>
 #include <tag.h>
 #include <fileref.h>
 

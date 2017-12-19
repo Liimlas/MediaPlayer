@@ -1,14 +1,9 @@
 #include "player.h"
-#include <iostream>
-
 #include "mainwindow.h"
-
-
 
 /* Constructor of the player class
  * Sets some usefull connections between between sliders and according functions
  */
-
 Player::Player(MainWindow *window)
 {
     _player = new QMediaPlayer;
