@@ -17,13 +17,12 @@ FileList::FileList(QTreeView *parent)
 
     model->setFilter(QDir::NoDotAndDotDot|QDir::Files);
     model->setNameFilterDisables(false);
-    model->setNameFilters(QStringList() << "*.mp3" << "*.wav");
-
+    model->setNameFilters(QStringList() << "*.mp3" << "*.wav" << "*.ogg");
 }
 
 void FileList::onSearch(QString search)
 {
-    model->setNameFilters(QStringList() << ("*" + search + "*.mp3") << ("*" + search + "*.wav"));
+    model->setNameFilters(QStringList() << ("*" + search + "*.mp3") << ("*" + search + "*.wav") << ("*" + search + "*.ogg"));
 }
 
 FileList::~FileList() {

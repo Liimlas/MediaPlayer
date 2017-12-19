@@ -16,7 +16,6 @@ public:
     void Play();
     void Pause();
     void SetVolume(float volume);
-    int GetVolume() const;
     int TogglePlay();
     void Initialize();
     qint64 Duration() const;
