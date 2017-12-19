@@ -25,6 +25,7 @@ public:
     void setSongDuration(qint64 position);
     void loadSelectedSong(const QModelIndex &);
     void playNextSong();
+    void updateSongData();
 
 private slots:
     void on_playButton_clicked();

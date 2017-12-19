@@ -90,6 +90,12 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 }
 void MainWindow::loadSelectedSong(const QModelIndex &index){
     QString filePath = fileList->getSongPath(index);
+    OpenFile(filePath);
+    updateSongData();
+    _player->Play();
+}
+
+void MainWindow::updateSongData(){
     TagLib::Tag *tag = fileList->getCurrentTag();
     auto text = tag->artist() +"\n"+ tag->title().toCString();
     ui->playingLabel->setText(QString(text.toCString()));
@@ -97,8 +103,6 @@ void MainWindow::loadSelectedSong(const QModelIndex &index){
     ui->TitleInput->setText(tag->title().toCString());
     ui->ArtistInput->setText(tag->artist().toCString());
     ui->CommentInput->setText(tag->comment().toCString());
-    OpenFile(filePath);
-    _player->Play();
 }
 
 void MainWindow::on_openButton_clicked()
@@ -157,4 +161,5 @@ void MainWindow::on_pushButton_clicked()
     tag->setTitle(ui->TitleInput->text().toStdString().c_str());
     tag->setComment(ui->CommentInput->text().toStdString().c_str());
     fileList->saveMetadata();
+    updateSongData();
 }
