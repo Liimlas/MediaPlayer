@@ -2,6 +2,7 @@
 #include <iostream>
 #include <QStandardPaths>
 #include <QStringList>
+#include <string>
 
 FileList::FileList(QTreeView *parent)
 {
@@ -11,14 +12,15 @@ FileList::FileList(QTreeView *parent)
     parent->setModel(model);
     parent->setRootIndex(idx);
     parent->setSortingEnabled(true);
+    model->setNameFilterDisables(false);
 
-    QStringList NameList("dankshit.wav");
-    NameList.append("Seppo");
+    model->setNameFilters(QStringList() << "*.mp3" << "*.wav");
 
-    auto filter = model->filter();
-    //model->setFilter(filter);
-    //model->setNameFilters(NameList);
+}
 
+void FileList::onSearch(QString search)
+{
+    model->setNameFilters(QStringList() << ("*" + search + "*.mp3") << ("*" + search + "*.wav"));
 }
 
 FileList::~FileList() {

@@ -14,6 +14,7 @@ public:
     QString getSongPath(const QModelIndex &);
     TagLib::Tag* getCurrentTag();
     void saveMetadata();
+    void onSearch(QString);
 private:
     QFileSystemModel *model;
     TagLib::FileRef *file = nullptr;

@@ -48,6 +48,8 @@ private slots:
 
     void on_loopButton_toggled(bool checked);
 
+    void on_searchLabel_textChanged();
+
 private:
     Ui::MainWindow *ui;
     Player *_player;

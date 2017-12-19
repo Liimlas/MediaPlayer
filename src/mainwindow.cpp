@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     fileList = new FileList(ui->treeView);
     ui->volumeSlider->setValue(50);
-    ui->playingLabel->setText("");
     _player->Initialize();
     SetButtons(false);
 }
@@ -96,12 +95,6 @@ void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
 }
 void MainWindow::loadSelectedSong(const QModelIndex &index){
     QString filePath = fileList->getSongPath(index);
-    OpenFile(filePath);
-    updateSongData();
-    _player->Play();
-}
-
-void MainWindow::updateSongData(){
     TagLib::Tag *tag = fileList->getCurrentTag();
     auto text = tag->artist() +"\n"+ tag->title().toCString();
     ui->playingLabel->setText(QString(text.toCString()));
@@ -109,6 +102,8 @@ void MainWindow::updateSongData(){
     ui->TitleInput->setText(tag->title().toCString());
     ui->ArtistInput->setText(tag->artist().toCString());
     ui->CommentInput->setText(tag->comment().toCString());
+    OpenFile(filePath);
+    _player->Play();
 }
 
 void MainWindow::on_openButton_clicked()
@@ -151,7 +146,8 @@ void MainWindow::setSongDuration(qint64 position)
     std::string ternaryStr1 = (currentPosition % 60) < 10 ? ("0" + std::to_string(currentPosition % 60)) : std::to_string(currentPosition % 60);
     std::string ternaryStr2 = (fullLength % 60) < 10 ?("0" + std::to_string(fullLength % 60)) : std::to_string(fullLength % 60);
     std::string text = std::to_string(currentPosition / 60) + ":" + ternaryStr1 + "/" + std::to_string(fullLength / 60) + ":" + ternaryStr2;
-    ui->durationLabel->setText(QString(text.c_str()));
+    ui->durationLabel->setText(QString(text.c_str()));std::string search = "";
+    QStringList NameList("asd");
 }
 
 void MainWindow::on_PositionSlider_sliderReleased()
@@ -167,11 +163,17 @@ void MainWindow::on_pushButton_clicked()
     tag->setTitle(ui->TitleInput->text().toStdString().c_str());
     tag->setComment(ui->CommentInput->text().toStdString().c_str());
     fileList->saveMetadata();
-    updateSongData();
 }
 
 void MainWindow::on_loopButton_toggled(bool checked)
 {
     loopOn = checked;
     std::cout << checked << std::endl;
+}
+
+
+void MainWindow::on_searchLabel_textChanged()
+{
+    QString search = ui->searchLabel->toPlainText();
+    fileList->onSearch(search);
 }
