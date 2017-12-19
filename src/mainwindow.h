@@ -46,10 +46,13 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_loopButton_toggled(bool checked);
+
 private:
     Ui::MainWindow *ui;
     Player *_player;
     FileList *fileList;
+    bool loopOn = false;
 };
 
 #endif // MAINWINDOW_H

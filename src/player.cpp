@@ -28,6 +28,7 @@ bool Player::OpenMusic(QString path)
     return true;
 }
 
+
 qint64 Player::getCurrentPosition(){
     return _player->position();
 }
@@ -48,7 +49,8 @@ void Player::SetVolume(float volume)
     _player->setVolume(volume);
 }
 
-int Player::GetVolume() const {
+int Player::GetVolume() const
+{
     return _player->volume();
 }
 

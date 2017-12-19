@@ -79,8 +79,14 @@ void MainWindow::on_backwardButton_clicked()
 
 void MainWindow::playNextSong()
 {
+
     if(_player->Duration() != -1 && _player->Duration() <= _player->getCurrentPosition()){
-        on_forwardButton_clicked();
+        if(loopOn) {
+            loadSelectedSong(ui->treeView->currentIndex());
+        }
+        else {
+            on_forwardButton_clicked();
+        }
     }
 }
 void MainWindow::on_treeView_doubleClicked(const QModelIndex &index)
@@ -162,4 +168,10 @@ void MainWindow::on_pushButton_clicked()
     tag->setComment(ui->CommentInput->text().toStdString().c_str());
     fileList->saveMetadata();
     updateSongData();
+}
+
+void MainWindow::on_loopButton_toggled(bool checked)
+{
+    loopOn = checked;
+    std::cout << checked << std::endl;
 }
